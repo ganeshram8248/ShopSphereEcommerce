@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+<script defer src="{% static 'js/admin.js' %}"></script>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+<div class="logo">🛒 ShopSphere</div>
+
+<a href="/">🏠 Dashboard</a>
+<a href="/products/">📦 Products</a>
+<a href="/orders/">📝 Orders</a>
+<a href="/customers/">👥 Customers</a>
+<a href="/seller-dashboard/">🏪 Sellers</a>
+<a href="/inventory/">📊 Inventory</a>
+<a href="/logout/">🚪 Logout</a>
+
+</div>
+
+<!-- Main -->
+<div class="main">
+
+<div class="topbar">
+<h1>Admin Dashboard</h1>
+<div class="admin">Admin 👑</div>
+</div>
+
+<div class="cards">
+<div class="card"><h3>Total Orders</h3><p>--</p></div>
+<div class="card"><h3>Customers</h3><p>--</p></div>
+<div class="card"><h3>Products</h3><p>--</p></div>
+<div class="card"><h3>Revenue</h3><p>₹--</p></div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

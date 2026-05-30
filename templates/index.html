@@ -1,0 +1,305 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>ShopSphere</title>
+
+<link rel="stylesheet"
+href="{% static 'css/index.css' %}">
+
+<script defer
+src="{% static 'js/index.js' %}">
+</script>
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+<div class="logo">
+
+🛒 ShopSphere
+
+</div>
+
+
+<ul class="nav-links">
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/products">
+Products
+</a></li>
+
+<li><a href="/cart">
+Cart
+</a></li>
+
+<li><a href="/orders">
+Orders
+</a></li>
+
+<li><a href="/profile">
+Profile
+</a></li>
+
+</ul>
+
+
+<div class="search">
+
+<input
+type="text"
+placeholder="Search products">
+
+<button>
+
+Search
+
+</button>
+
+</div>
+
+</nav>
+
+
+
+<section class="hero">
+
+<div class="overlay">
+
+<h1>
+
+Smart Ecommerce Platform
+
+</h1>
+
+<p>
+
+Buy Electronics • Fashion • Grocery
+
+</p>
+
+
+<a href="/products"
+
+class="btn">
+
+Shop Now
+
+</a>
+
+
+</div>
+
+</section>
+
+
+
+
+<section class="categories">
+
+<div class="cat">
+
+📱 Mobiles
+
+</div>
+
+<div class="cat">
+
+💻 Laptop
+
+</div>
+
+<div class="cat">
+
+⌚ Watch
+
+</div>
+
+<div class="cat">
+
+👟 Shoes
+
+</div>
+
+</section>
+
+
+
+
+
+<h1 class="title">
+
+Trending Products
+
+</h1>
+
+
+
+<section class="products">
+
+
+<div class="card">
+
+<img src="{% static 'images/mobile.jpg' %}">
+
+<h2>
+
+iPhone 15
+
+</h2>
+
+<p>
+
+₹79,999
+
+</p>
+
+<button>
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="{% static 'images/apple15laptop.jpg' %}">
+
+<h2>
+
+Apple Laptop 15
+
+</h2>
+
+<p>
+
+₹89,999
+
+</p>
+
+<button>
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="{% static 'images/fridge.jpg' %}">
+
+<h2>
+
+Smart Fridge
+
+</h2>
+
+<p>
+
+₹49,999
+
+</p>
+
+<button>
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+<div class="card">
+
+<img src="{% static 'images/pendire.jpg' %}">
+
+<h2>
+
+Pendrive 128GB
+
+</h2>
+
+<p>
+
+₹2,999
+
+</p>
+
+<button>
+
+Add Cart
+
+</button>
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section class="review">
+
+
+<h1>
+
+Customer Reviews
+
+</h1>
+
+
+<div>
+
+⭐⭐⭐⭐⭐ Nice website
+
+</div>
+
+
+<div>
+
+⭐⭐⭐⭐⭐ Fast delivery
+
+</div>
+
+
+<div>
+
+⭐⭐⭐⭐⭐ Good products
+
+</div>
+
+
+</section>
+
+
+
+<footer>
+
+© 2026 ShopSphere
+
+</footer>
+
+
+
+</body>
+</html>

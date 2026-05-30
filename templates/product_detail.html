@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>{{ product.name }}</title>
+
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+<script defer src="{% static 'js/product_detail.js' %}"></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <h1>🛒 ShopSphere</h1>
+
+    <a href="/products/">← Back</a>
+</nav>
+
+
+<!-- PRODUCT -->
+<div class="container">
+
+    <div class="card">
+
+        <div class="img-box">
+            <img src="{{ product.image.url }}" class="product-img">
+        </div>
+
+        <div class="info">
+
+            <h1>{{ product.name }}</h1>
+
+            <p class="rating">⭐ {{ product.rating }}</p>
+
+            <p class="desc">{{ product.description }}</p>
+
+            <h2 class="price">₹{{ product.price }}</h2>
+
+            <!-- STOCK -->
+            {% if product.stock > 10 %}
+                <p class="green">✅ In Stock</p>
+
+            {% elif product.stock > 0 %}
+                <p class="orange">⚠ Only {{ product.stock }} left</p>
+
+            {% else %}
+                <p class="red">❌ Out of Stock</p>
+            {% endif %}
+
+
+            <!-- DELIVERY -->
+            <div class="delivery">
+                🚚 Delivery in <span>72 Hours</span>
+            </div>
+
+
+            <!-- BUTTONS -->
+            <div class="buttons">
+
+                
+
+                {% if product.stock > 0 %}
+
+                <!-- BUY NOW (IMPORTANT FLOW) -->
+                <a href="{% url 'checkout' product.id %}" class="buy-btn">
+                    ⚡ Buy Now
+                </a>
+
+                {% else %}
+
+                <button class="disabled" disabled>
+                    Unavailable
+                </button>
+
+                {% endif %}
+
+            </div>
+
+            <p id="msg"></p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

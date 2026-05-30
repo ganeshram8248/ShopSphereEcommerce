@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>
+Products
+</title>
+
+<link rel="stylesheet"
+href="{% static 'css/products.css' %}">
+
+<script defer
+src="{% static 'js/products.js' %}">
+</script>
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+<div class="logo">
+🛒 ShopSphere
+</div>
+
+
+<div class="search-box">
+
+<input
+id="searchInput"
+placeholder="Search products">
+
+<button onclick="searchProduct()">
+
+🔍
+
+</button>
+
+</div>
+
+
+<div class="nav-links">
+
+<a href="/">Home</a>
+
+<a href="/cart/">
+
+Cart
+
+</a>
+
+<a href="/wishlist/">
+
+Wishlist
+
+</a>
+
+
+<a href="/orders/">
+
+Orders
+
+</a>
+
+</div>
+
+</nav>
+
+
+
+<h1 class="title">
+
+Premium Products
+
+</h1>
+
+
+
+<div class="filters">
+
+<button onclick=
+"filterProduct('all')">
+
+All
+
+</button>
+
+
+<button onclick=
+"filterProduct('mobile')">
+
+Mobile
+
+</button>
+
+
+<button onclick=
+"filterProduct('laptop')">
+
+Laptop
+
+</button>
+
+
+<button onclick=
+"filterProduct('tv')">
+
+TV
+
+</button>
+
+</div>
+
+
+
+
+<div class="products">
+
+
+{% for product in products %}
+
+
+<div class=
+"card {{product.category}}">
+
+
+<img
+src="{{product.image.url}}">
+
+
+
+<h3>
+
+{{product.name}}
+
+</h3>
+
+
+<p class="price">
+
+₹{{product.price}}
+
+</p>
+
+
+
+<p>
+
+⭐ {{product.rating}}
+
+</p>
+
+
+
+{% if product.stock > 0 %}
+
+<p class="green">
+
+{{product.stock}}
+Available
+
+</p>
+
+{% else %}
+
+<p class="red">
+
+Out Of Stock
+
+</p>
+
+{% endif %}
+
+
+
+<div class="buttons">
+
+
+<a
+href="{% url 'product_detail' product.id %}"
+class="view">
+
+View
+
+</a>
+
+
+
+<a
+href="{% url 'add_cart' product.id %}"
+class="cart">
+
+Cart
+
+</a>
+
+
+
+<a
+href="/wishlist/add/{{product.id}}/"
+class="wish">
+
+❤️
+
+</a>
+
+
+</div>
+
+</div>
+
+
+{% endfor %}
+
+</div>
+
+
+</body>
+</html>

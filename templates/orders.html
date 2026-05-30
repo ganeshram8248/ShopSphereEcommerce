@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders</title>
+    <link rel="stylesheet" href="{% static 'css/orders.css' %}">
+    <script defer src="{% static 'js/orders.js' %}"></script>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <h2>📦 ShopSphere Orders</h2>
+    <div>
+        <a href="/">Home</a>
+        <a href="/products/">Products</a>
+        <a href="/profile/">Profile</a>
+    </div>
+</nav>
+
+<h1 class="title">My Orders</h1>
+
+<div class="orders-container">
+
+{% for order in orders %}
+
+<div class="order-card">
+
+    <h2>{{ order.product_name }}</h2>
+
+    <p class="price">₹{{ order.price }}</p>
+
+    <p>📞 {{ order.phone }}</p>
+    <p>📍 {{ order.address }}</p>
+
+    <p>
+        Status:
+        <span class="status {{ order.status }}">
+            {{ order.status }}
+        </span>
+    </p>
+
+    <p>🕒 {{ order.created_at }}</p>
+
+    <div class="btn-group">
+
+        <!-- TRACK -->
+        <button class="btn track-btn"
+            onclick="trackOrder('{{ order.id }}')">
+            Track
+        </button>
+
+        <!-- CANCEL -->
+        <button class="btn cancel-btn"
+            onclick="cancelOrder('{{ order.id }}', this)">
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<div class="empty">
+    <h2>No Orders Yet</h2>
+    <p>Start shopping to see your orders here</p>
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

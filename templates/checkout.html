@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Checkout</title>
+
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+<script defer src="{% static 'js/checkout.js' %}"></script>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <h1>🛒 ShopSphere Checkout</h1>
+    <a href="/products/">← Back</a>
+</nav>
+
+
+<!-- MAIN -->
+<div class="container">
+
+    <div class="box">
+
+        <h1>🧾 Enter Details</h1>
+
+        <p class="sub">
+            Fill your delivery information to place order
+        </p>
+
+        <form method="POST" class="form">
+            {% csrf_token %}
+
+            <input type="text" name="name" placeholder="Full Name" required>
+
+            <input type="text" name="address" placeholder="Delivery Address" required>
+
+            <input type="text" name="phone" placeholder="Phone Number" required>
+
+            <button type="submit" class="btn">
+                🚀 Place Order
+            </button>
+
+        </form>
+
+        <p id="msg"></p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

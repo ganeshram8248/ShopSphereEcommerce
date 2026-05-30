@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>My Profile</title>
+
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<script defer src="{% static 'js/profile.js' %}"></script>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar">
+
+    <h1 class="logo">🛒 ShopSphere</h1>
+
+    <div class="nav-links">
+
+        <a href="/">🏠 Home</a>
+        <a href="/products/">🛍 Products</a>
+        <a href="/orders/">📦 Orders</a>
+        <a href="/wishlist/">❤️ Wishlist</a>
+
+        <!-- SETTINGS (HIGHLIGHTED) -->
+        <a href="/settings/" class="settings-btn">⚙ Settings</a>
+
+        <a href="/logout/" class="logout-btn">🚪 Logout</a>
+
+    </div>
+</nav>
+
+
+<!-- ================= PROFILE BOX ================= -->
+<div class="profile-box">
+
+    <!-- TOP SECTION -->
+    <div class="top">
+
+        <img class="profile-img"
+             src="{% static 'images/user.png' %}">
+
+        <div class="user-info">
+
+            <h1>{{ profile.user.username }}</h1>
+            <p>{{ profile.user.email }}</p>
+
+            <button onclick="editProfile()" class="edit-btn">
+                ✏ Edit Profile
+            </button>
+
+        </div>
+    </div>
+
+
+    <!-- STATS -->
+    <div class="stats">
+
+        <div class="card">
+            <h2>{{ orders_count }}</h2>
+            <p>Orders</p>
+        </div>
+
+        <div class="card">
+            <h2>₹{{ total_spent }}</h2>
+            <p>Spent</p>
+        </div>
+
+        <div class="card">
+            <h2>{{ wishlist_count }}</h2>
+            <p>Wishlist</p>
+        </div>
+
+    </div>
+
+
+    <!-- PROFILE FORM -->
+    <form method="POST" class="form">
+        {% csrf_token %}
+
+        <label>Phone</label>
+        <input name="phone"
+               placeholder="Enter phone"
+               value="{{ profile.phone }}">
+
+        <label>Address</label>
+        <textarea name="address"
+                  placeholder="Enter address">{{ profile.address }}</textarea>
+
+        <button class="save-btn">Save Changes</button>
+    </form>
+
+
+    <!-- QUICK MENU -->
+    <div class="menu">
+
+        <a href="/orders/">📦 My Orders</a>
+        <a href="/wishlist/">❤️ Wishlist</a>
+        <a href="/cart/">🛒 Cart</a>
+        <a href="/settings/">⚙ Account Settings</a>
+        <a href="/logout/">🚪 Logout</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
