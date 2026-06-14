@@ -12,36 +12,53 @@ body{
 }
 
 /* ================= NAVBAR ================= */
-.navbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 50px;
-    background:rgba(255,255,255,0.06);
-    backdrop-filter:blur(20px);
-    border-bottom:1px solid rgba(255,255,255,0.1);
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 50px;
+
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.logo{
-    font-size:22px;
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
 }
 
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    margin-left:18px;
-    padding:10px 14px;
-    border-radius:12px;
-    transition:0.3s;
-    font-size:15px;
+.nav-links {
+    display: flex;
+    gap: 25px;
 }
 
-.nav-links a:hover{
-    background:rgba(0,255,255,0.15);
-    color:cyan;
-    transform:translateY(-2px);
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
+.nav-links a:hover {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.nav-links a.active {
+    background: #2563eb;
+    color: #ffffff;
+}
 /* SETTINGS BUTTON */
 .settings-btn{
     background:linear-gradient(45deg,cyan,blue);
@@ -61,18 +78,51 @@ body{
 
 
 /* ================= PROFILE BOX ================= */
-.profile-box{
-    width:800px;
-    max-width:95%;
-    margin:40px auto;
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(20px);
-    padding:30px;
-    border-radius:25px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.4);
-    animation:fadeIn 0.8s;
+.profile-box {
+    width: 800px;
+    max-width: 95%;
+    margin: 40px auto;
+
+    background: #ffffff;
+    padding: 30px;
+
+    border-radius: 20px;
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    animation: fadeIn 0.8s ease-in-out;
 }
 
+.profile-box h2 {
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+.profile-box p {
+    margin: 12px 0;
+    color: #475569;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.profile-box button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: white;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.profile-box button:hover {
+    background: #1d4ed8;
+}
+/* ANIMATION */
 @keyframes fadeIn{
     from{opacity:0; transform:translateY(40px);}
     to{opacity:1; transform:translateY(0);}
@@ -152,14 +202,12 @@ input,textarea{
     outline:none;
 }
 
-textarea{
-    min-height:80px;
-}
+
 
 .save-btn{
-    padding:14px;
+    padding:12px;
     border:none;
-    border-radius:12px;
+    border-radius:10px;
     background:linear-gradient(45deg,cyan,blue);
     cursor:pointer;
     font-size:16px;

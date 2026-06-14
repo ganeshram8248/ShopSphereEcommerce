@@ -1,186 +1,72 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0">
+<title>My Cart</title>
 
-<title>
-My Cart
-</title>
-
-
-<link
-rel="stylesheet"
-href="{% static 'css/cart.css' %}">
-
-
-<script
-src="{% static 'js/cart.js' %}"
-defer>
-
-</script>
-
-
+<link rel="icon" href="{% static 'images/logo.png' %}">
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<script src="{% static 'js/cart.js' %}" defer></script>
 </head>
-
 
 <body>
 
-
 <nav class="navbar">
-
-<h1>
-🛒 My Cart
-</h1>
-
-
-<a href="/products">
-
-Products
-
-</a>
-
+    <h1>🛒 My Cart</h1>
+    <a href="/products">Products</a>
 </nav>
 
-
-
-<h1 class="title">
-
-Shopping Cart
-
-</h1>
-
-
-
+<h1 class="title">Shopping Cart</h1>
 
 <div class="cart-container">
 
-
 {% for item in cart_items %}
-
 
 <div class="card">
 
+    <img src="{{ item.product.image.url }}" alt="">
 
-<img
-src="{{item.product.image.url}}"
-alt="">
+    <h2>{{ item.product.name }}</h2>
 
+    <p class="price">₹{{ item.product.price }}</p>
 
-<h2>
+    <!-- QUANTITY SECTION -->
+    <div class="qty-box">
 
-{{item.product.name}}
+        <a href="{% url 'decrease_qty' item.id %}" class="qty-btn">➖</a>
 
-</h2>
+        <span class="qty">{{ item.quantity }}</span>
 
+        <a href="{% url 'increase_qty' item.id %}" class="qty-btn">➕</a>
 
-<p class="price">
+    </div>
 
-₹{{item.product.price}}
+    <div class="buttons">
 
-</p>
+        <a href="{% url 'product_detail' item.product.id %}" class="view">View</a>
 
+        <a href="{% url 'buy_now' item.product.id %}" class="buy">Buy</a>
 
+        <a href="{% url 'remove_cart' item.id %}" class="remove">Remove</a>
 
-<p>
-
-Qty:
-
-<span class="qty">
-
-{{item.quantity}}
-
-</span>
-
-</p>
-
-
-
-<div class="buttons">
-
-
-<a
-
-href="{% url 'product_detail' item.product.id %}"
-
-class="view"
-
->
-
-View
-
-</a>
-
-
-
-<a
-
-href="{% url 'buy_now' item.product.id %}"
-
-class="buy"
-
->
-
-Buy
-
-</a>
-
-
-
-<a
-
-href="{% url 'remove_cart' item.id %}"
-
-class="remove"
-
->
-
-Remove
-
-</a>
-
-
+    </div>
 
 </div>
-
-
-</div>
-
 
 {% empty %}
 
-
-<h2 class="empty">
-
-Cart Empty 🛒
-
-</h2>
-
+<h2 class="empty">Cart Empty 🛒</h2>
 
 {% endfor %}
 
-
 </div>
-
-
 
 <div class="summary">
-
-Total :
-
-₹{{total}}
-
+    Total : ₹{{ total }}
 </div>
 
-
-
 </body>
-
 </html>

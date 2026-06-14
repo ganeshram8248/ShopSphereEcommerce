@@ -1,19 +1,8 @@
-// TRACK ORDER (simple demo page redirect or popup)
-function trackOrder(orderId) {
-    alert("Tracking Order ID: " + orderId);
-    // OR redirect:
-    // window.location.href = "/track-order/" + orderId + "/";
-}
+function cancelOrder(id) {
 
+    if (!confirm("Are you sure to cancel this order?")) return;
 
-// CANCEL ORDER (AJAX to Django)
-function cancelOrder(orderId, btn) {
-
-    if (!confirm("Are you sure you want to cancel this order?")) {
-        return;
-    }
-
-    fetch("/cancel-order/" + orderId + "/", {
+    fetch("/cancel/" + id + "/", {
         method: "POST",
         headers: {
             "X-CSRFToken": getCookie("csrftoken")
@@ -23,28 +12,27 @@ function cancelOrder(orderId, btn) {
     .then(data => {
 
         if (data.success) {
-            btn.closest(".order-card").querySelector(".status").innerText = "Cancelled";
-            btn.disabled = true;
-            btn.innerText = "Cancelled";
-            btn.style.background = "gray";
+            alert("Order Cancelled");
+            location.reload();
+        } else {
+            alert("Something went wrong");
         }
 
     });
+
 }
 
-
-// CSRF helper
+// CSRF TOKEN
 function getCookie(name) {
     let cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-        const cookies = document.cookie.split(";");
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + "=")) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
+
+    document.cookie.split(";").forEach(c => {
+        c = c.trim();
+
+        if (c.startsWith(name + "=")) {
+            cookieValue = decodeURIComponent(c.split("=")[1]);
         }
-    }
+    });
+
     return cookieValue;
 }

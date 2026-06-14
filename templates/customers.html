@@ -2,130 +2,53 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Customers</title>
 
-<title>Customers</title>
-
-<link
-rel="stylesheet"
-href="{% static 'css/customers.css' %}">
-
-<script
-defer
-src="{% static 'js/customers.js' %}">
-</script>
-
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/customers.css' %}">
+    <script defer src="{% static 'js/customers.js' %}"></script>
 </head>
 
 <body>
 
-
 <nav class="navbar">
 
-<div class="logo">
+    <div class="logo">👥 Customers</div>
 
-👥 Customers
-
-</div>
-
-
-<input
-
-id="search"
-
-placeholder="Search customer">
-
+    <input id="search" placeholder="Search customer..." onkeyup="searchCustomer()">
 
 </nav>
 
-
-
-<h1 class="title">
-
-Customer Management
-
-</h1>
-
-
-
+<h1 class="title">Customer Management</h1>
 
 <section class="customers-container">
 
-
 {% for customer in customers %}
-
 
 <div class="customer-card">
 
+    <div class="top">
+        <h2 class="name">{{ customer.user.username }}</h2>
 
-<div class="top">
+        <span class="role">{{ customer.role }}</span>
+    </div>
 
+    <p>📞 {{ customer.phone }}</p>
+    <p>🏠 {{ customer.address }}</p>
 
-<h2 class="name">
+    <p class="status">🟢 Active</p>
 
-{{customer.user.username}}
-
-</h2>
-
-
-
-<span class="premium">
-
-{{customer.role}}
-
-</span>
-
+    <button onclick="viewProfile('{{ customer.user.username }}')">
+        View Profile
+    </button>
 
 </div>
 
-
-
-<p>
-
-📞
-
-{{customer.phone}}
-
-</p>
-
-
-
-<p>
-
-🏠
-
-{{customer.address}}
-
-</p>
-
-
-
-
-<p class="active">
-
-🟢 Active
-
-</p>
-
-
-
-
-<button>
-
-View Profile
-
-</button>
-
-
-</div>
-
-
+{% empty %}
+<p>No customers found</p>
 {% endfor %}
 
-
-
 </section>
-
-
 
 </body>
 </html>

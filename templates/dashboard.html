@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+
+<h1>📊 Dashboard</h1>
+
+<div class="stats">
+
+    <div class="box">
+        <h2>{{ order_count }}</h2>
+        <p>Orders</p>
+    </div>
+
+    <div class="box">
+        <h2>{{ cart_count }}</h2>
+        <p>Cart Items</p>
+    </div>
+
+    <div class="box">
+        <h2>₹{{ spent }}</h2>
+        <p>Total Spent</p>
+    </div>
+
+</div>
+
+<h2>My Orders</h2>
+
+<div class="orders">
+
+{% for order in orders %}
+
+<div class="order">
+
+    <p>{{ order.name }}</p>
+    <p>₹{{ order.price }}</p>
+    <p>{{ order.status }}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>

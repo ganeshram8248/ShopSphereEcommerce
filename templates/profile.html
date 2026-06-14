@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>My Profile</title>
-
+<link rel="icon" href="{% static 'images/logo.png' %}">
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 <script defer src="{% static 'js/profile.js' %}"></script>
 </head>
@@ -26,7 +26,7 @@
         <a href="/wishlist/">❤️ Wishlist</a>
 
         <!-- SETTINGS (HIGHLIGHTED) -->
-        <a href="/settings/" class="settings-btn">⚙ Settings</a>
+        <a href="/profile/" class="settings-btn">⚙ Settings</a>
 
         <a href="/logout/" class="logout-btn">🚪 Logout</a>
 
@@ -41,16 +41,16 @@
     <div class="top">
 
         <img class="profile-img"
-             src="{% static 'images/user.png' %}">
+             src="{% static 'images/media.Webp' %}">
 
         <div class="user-info">
 
             <h1>{{ profile.user.username }}</h1>
             <p>{{ profile.user.email }}</p>
 
-            <button onclick="editProfile()" class="edit-btn">
+            <!--<button onclick="editProfile()" class="edit-btn">
                 ✏ Edit Profile
-            </button>
+            </button>-->
 
         </div>
     </div>
@@ -77,35 +77,70 @@
     </div>
 
 
-    <!-- PROFILE FORM -->
-    <form method="POST" class="form">
+   <!-- View Details -->
+<div class="profile-box">
+<p><strong>Phone:</strong> {{ profile.phone }}</p>
+<br>
+<p><strong>Address:</strong> {{ profile.address }}</p>
+<br>
+<br>
+<button type="button"  class="save-btn"
+        onclick="document.getElementById('editForm').style.display='block'">
+    ✏ Edit Details
+</button>
+<br>
+<br>
+</div>
+
+<div id="editForm" style="display:none;">
+    <form method="POST">
         {% csrf_token %}
 
-        <label>Phone</label>
-        <input name="phone"
-               placeholder="Enter phone"
-               value="{{ profile.phone }}">
+<label for="phone">Phone</label>
+<input
+    id="phone"
+    type="text"
+    name="phone"
+    value="{{ profile.phone }}"
+    placeholder="Enter phone number">
 
-        <label>Address</label>
-        <textarea name="address"
-                  placeholder="Enter address">{{ profile.address }}</textarea>
-
-        <button class="save-btn">Save Changes</button>
+<label for="address">Address</label>
+<input
+    id="address"
+    type="text"
+    name="address"
+    value="{{ profile.address }}"
+    placeholder="Enter address">
+<br>
+<br>
+        <button type="submit" class="save-btn">
+            Save Changes
+        </button>
     </form>
+</div>
 
-
+<br>
     <!-- QUICK MENU -->
     <div class="menu">
 
         <a href="/orders/">📦 My Orders</a>
         <a href="/wishlist/">❤️ Wishlist</a>
         <a href="/cart/">🛒 Cart</a>
-        <a href="/settings/">⚙ Account Settings</a>
+       
         <a href="/logout/">🚪 Logout</a>
 
     </div>
 
-</div>
 
 </body>
+<br>
+<br>
+<br>
+<br>
+<br>  
+ <center>
+<footer>
+    © 2026 ShopSphere | All rights reserved
+</footer>
+</center>
 </html>

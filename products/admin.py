@@ -31,3 +31,4 @@ class ProductAdmin(admin.ModelAdmin):
         'category',
 
     )
+    ordering=('name',)

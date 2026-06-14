@@ -16,16 +16,21 @@ from vendors.models import Vendor
 from .models import Product
 
 
-from django.http import JsonResponse
+from django.http import JsonResponse, request
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from core.products import PRODUCT_LIST
 from userwishlist.models import Wishlist
 from products.models import Product
 from cart.models import CartItem
 from cart.models import Cart  
-from userprofile.models import Profile
+from customers.models import CustomerProfile
 from orders.models import Order
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+
+
+def splash(request):
+    return render(request, "splashscreen.html")
 
 # HOME
 
@@ -156,80 +161,38 @@ def product_detail(
 
     )
 
-
-# PROFILE
-
 @login_required
 def profile(request):
 
-    profile = Profile.objects.get(
+    profile = CustomerProfile.objects.get(user=request.user)
 
-        user=request.user
+    if request.method == "POST":
+        profile.phone = request.POST.get("phone")
+        profile.address = request.POST.get("address")
+        profile.save()
 
-    )
-
-
-    orders_count = Order.objects.filter(
-
-        user=request.user
-
-    ).count()
-
-
+    orders_count = Order.objects.filter(user=request.user).count()
 
     total_spent = sum(
-
         Order.objects.filter(
-
             user=request.user
-
-        ).values_list(
-
-            "price",
-
-            flat=True
-
-        )
-
+        ).values_list("price", flat=True)
     )
-
 
     wishlist_count = Wishlist.objects.filter(
-
         user=request.user
-
     ).count()
 
-
     return render(
-
         request,
-
         "profile.html",
-
         {
-
-        "profile":
-
-        profile,
-
-        "orders_count":
-
-        orders_count,
-
-        "total_spent":
-
-        total_spent,
-
-        "wishlist_count":
-
-        wishlist_count
-
+            "profile": profile,
+            "orders_count": orders_count,
+            "total_spent": total_spent,
+            "wishlist_count": wishlist_count,
         }
-
     )
-
-
 # CUSTOMER DASHBOARD
 
 @login_required
@@ -485,10 +448,17 @@ def inventory(request):
 @login_required
 def orders_list(request):
 
-    orders = Order.objects.filter(user=request.user)
+    orders = Order.objects.filter(
+        user=request.user
+    )
 
-    return render(request, "orders.html", {"orders": orders})
-
+    return render(
+        request,
+        "orders.html",
+        {
+            "orders": orders
+        }
+    )
 
 @login_required
 def cancel_order(request, id):
@@ -514,148 +484,36 @@ def cancel_order(request, id):
     return JsonResponse({"success": False, "error": "Invalid request"})
 
 @login_required
-def settings_view(request):
-    return render(request, "settings.html")
-
-
-@login_required
 def buy_now(request, id):
-    
-    product = None
+    return redirect("checkout", id=id)
 
-    for p in PRODUCT_LIST:
-        if p["id"] == id:
-            product = p
-
-    if request.method == "POST":
-
-        Order.objects.create(
-
-            user=request.user,
-            product_name=product["name"],
-            price=product["price"],
-            phone=request.POST["phone"],
-            address=request.POST["address"]
-
-        )
-
-        return redirect("orders_list")
 @login_required(
     login_url="/login/"
 )
 
-def checkout(request,id):
+@login_required(login_url="/login/")
+def checkout(request, id):
 
-    product = get_object_or_404(
+    product = get_object_or_404(Product, id=id)
 
-        Product,
+    if request.method == "POST":
 
-        id=id
-
-    )
-
-
-    if request.method=="POST":
-
-
-        name = request.POST.get(
-
-            "name"
-
-        )
-
-
-        address = request.POST.get(
-
-            "address"
-
-        )
-
-
-        phone = request.POST.get(
-
-            "phone"
-
-        )
-
-
-
-        order = Order.objects.create(
-
+        Order.objects.create(
             user=request.user,
-
             product=product,
-
-            name=name,
-
-            address=address,
-
-            phone=phone
-
+            name=product.name,
+            price=product.price,
+            phone=request.POST.get("phone"),
+            address=request.POST.get("address")
         )
 
-
-
-        vendor = Vendor.objects.filter(
-
-         user=product.user
-
-        ).first()
-
-
-
-        if vendor:
-
-
-            vendor.total_orders += 1
-
-
-            vendor.total_sales += (
-
-                product.price
-
-            )
-
-
-
-            vendor.total_products = (
-
-                Product.objects.filter(
-
-                    user=vendor.user
-
-                ).count()
-
-            )
-
-
-
-            vendor.save()
-
-
-
-        return redirect(
-
-            "order_success"
-
-        )
-
-
+        return redirect("/orders/")
 
     return render(
-
         request,
-
         "checkout.html",
-
-        {
-
-        "product":product
-
-        }
-
+        {"product": product}
     )
-
 def order_success(request):
     return render(request, "order_success.html")
 
@@ -674,3 +532,7 @@ def add_to_cart(request, id):
         return JsonResponse({"success": True})
 
     return JsonResponse({"success": False})
+
+
+
+

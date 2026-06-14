@@ -1,0 +1,117 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    width:100%;
+    height:100vh;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* Center Container */
+
+.splash-container{
+    text-align:center;
+}
+
+/* Logo Circle */
+
+.logo-ring{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+
+    background:rgba(255,255,255,0.03);
+
+    border:2px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+    0 0 15px #00e5ff,
+    0 0 35px #00e5ff,
+    0 0 70px rgba(0,229,255,.7);
+
+    animation:floatLogo 3s ease-in-out infinite;
+}
+
+/* Logo */
+
+.logo{
+    width:130px;
+    height:130px;
+    object-fit:cover;
+    border-radius:50%;
+}
+
+/* Brand */
+
+.brand-name{
+    color:#fff;
+    margin-top:25px;
+    font-size:34px;
+    font-weight:700;
+    letter-spacing:3px;
+
+    text-shadow:
+    0 0 10px #00e5ff,
+    0 0 25px #00e5ff;
+}
+
+/* Tagline */
+
+.tagline{
+    color:#cfcfcf;
+    margin-top:10px;
+    font-size:16px;
+    letter-spacing:2px;
+}
+
+/* Floating Animation */
+
+@keyframes floatLogo{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .logo-ring{
+        width:150px;
+        height:150px;
+    }
+
+    .logo{
+        width:105px;
+        height:105px;
+    }
+
+    .brand-name{
+        font-size:26px;
+    }
+
+    .tagline{
+        font-size:14px;
+    }
+}

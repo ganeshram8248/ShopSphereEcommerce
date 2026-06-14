@@ -1,88 +1,54 @@
-window.onload=
+// ===============================
+// CUSTOMER SEARCH FILTER
+// ===============================
 
-function(){
+document.addEventListener("DOMContentLoaded", function () {
 
+    const searchInput = document.getElementById("search");
+    const cards = document.querySelectorAll(".customer-card");
 
-document
+    if (!searchInput) return;
 
-.querySelectorAll(
+    searchInput.addEventListener("input", function () {
 
-".card"
+        const query = searchInput.value.toLowerCase().trim();
 
-)
+        cards.forEach(card => {
 
-.forEach(
+            const name = card.querySelector(".name")?.innerText.toLowerCase() || "";
+            const phone = card.querySelector("p")?.innerText.toLowerCase() || "";
+            const role = card.querySelector(".premium")?.innerText.toLowerCase() || "";
 
-card=>{
+            if (
+                name.includes(query) ||
+                phone.includes(query) ||
+                role.includes(query)
+            ) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
 
-
-card.addEventListener(
-
-"mouseenter",
-
-function(){
-
-this.style.transform=
-
-"scale(1.05)";
-
-}
-
-
-);
-
-
-
-card.addEventListener(
-
-"mouseleave",
-
-function(){
-
-this.style.transform=
-
-"scale(1)";
-
-}
+});
 
 
-);
+// ===============================
+// VIEW PROFILE BUTTON (OPTIONAL)
+// ===============================
 
+document.addEventListener("click", function (e) {
 
-}
+    if (e.target && e.target.innerText === "View Profile") {
 
-);
+        const card = e.target.closest(".customer-card");
 
+        const name = card.querySelector(".name").innerText;
 
+        alert("Opening profile of: " + name);
 
-}
-
-
-
-
-
-
-document
-
-.querySelector(
-
-".banner button"
-
-)
-
-.addEventListener(
-
-"click",
-
-function(){
-
-
-window.location.href=
-
-"/products";
-
-
-}
-
-
-);
+        // You can redirect later:
+        // window.location.href = "/customer/" + name + "/";
+    }
+});

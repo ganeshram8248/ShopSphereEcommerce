@@ -1,30 +1,25 @@
 from django.urls import path
 from . import views
 
+urlpatterns = [
+    # Dashboard page
+    path(
+        "",
+        views.dashboard,
+        name="dashboard"
+    ),
 
-urlpatterns=[
+    # Customers list page (staff only)
+    path(
+        "customers/",
+        views.customers_list,
+        name="customers"
+    ),
 
-
-path(
-
-'dashboard/',
-
-views.dashboard,
-
-name='dashboard'
-
-),
-
-
-
-path(
-
-'',
-
-views.customers_list,
-
-name='customers'
-
-)
-
+    # Profile page (ADDED FIX)
+    path(
+        "profile/",
+        views.profile,
+        name="profile"
+    ),
 ]

@@ -15,17 +15,17 @@ INSTALLED_APPS = [
 'django.contrib.sessions',
 'django.contrib.messages',
 'django.contrib.staticfiles',
+
+'customers',
 'core',
 'products',
 'orders',
 'cart',
-'userprofile',
 'userwishlist',
-'customers',
-'inventory',
 'vendors',
-'seller',
+
 ]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

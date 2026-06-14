@@ -28,3 +28,6 @@ class VendorAdmin(admin.ModelAdmin):
         'verified',
 
     )
+    ordering=('shop_name',)
+
+    list_editable=('verified',)
